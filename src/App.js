@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Issues from "./components/Issues"
 
 function App() {
+  let issues = [
+    {
+      index: 1,
+      name: "Issue 1",
+      assigned_to: ['name1', 'name2'],
+      issue: "Bug 1",
+      priority: "High"
+    },
+    {
+      index: 2,
+      name: "Issue 2",
+      assigned_to: ['name3', 'name4'],
+      issue: "Bug 2",
+      priority: "Low"
+    }
+  ]
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Issues issues={issues}/>
     </div>
   );
 }
