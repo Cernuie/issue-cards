@@ -4,14 +4,14 @@ import Issues from "./components/Issues"
 function App() {
   let issues = [
     {
-      index: 1,
+      index: 0,
       name: "Issue 1",
       assigned_to: ['name1', 'name2'],
       issue: "Bug 1",
       priority: "High"
     },
     {
-      index: 2,
+      index: 1,
       name: "Issue 2",
       assigned_to: ['name3', 'name4'],
       issue: "Bug 2",

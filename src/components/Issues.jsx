@@ -1,38 +1,28 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import CardGroup from 'react-bootstrap/CardGroup'
-import { Accordion, AccordionCollapse, Button } from 'react-bootstrap'
+import { Accordion } from 'react-bootstrap'
 
 export default function issues({ issues }) {
+
   return (
-        <div>
-            <Accordion>
-                    {Array.isArray(issues) ? issues.map((issue, index) => {
-                        return(
-                        <Card 
-                        key={issue.index} 
-                        bg='dark'
-                        text='light'
-                        >
-                            <Card.Body>
-                            <Accordion.Toggle as={Button} variant="link" eventKey={index}>
-                                <Card.Title>
-                                    {issue.name}
-                                </Card.Title>
-                            </Accordion.Toggle>
-                            <Accordion.Collapse eventKey={index}>
-                                <Card.Text>
-                                    {issue.issue}
-                                </Card.Text>
-                            </Accordion.Collapse>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small>Card Priority: {issue.priority}</small>
-                            </Card.Footer>
-                        </Card>
-                        )
-                    }): "Error loading issues"}
-            </Accordion>
-        </div>
+    <Accordion defaultActiveKey="0" alwaysOpen>
+        {issues.map((issue, index) => (
+            <Accordion.Item key={issue.index} eventKey={index}>
+                <Accordion.Header>
+                    {issue.name}
+                </Accordion.Header>
+                <Accordion.Body>
+                    <Card>
+                        <Card.Header>
+                            Assigned to: {[...issue.assigned_to]}
+                        </Card.Header>
+                        <Card.Body>
+                    {issue.issue}
+                        </Card.Body>
+                    </Card>
+                </Accordion.Body>
+            </Accordion.Item>
+        ))}
+    </Accordion>
   )
 }
