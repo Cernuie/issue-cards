@@ -1,5 +1,6 @@
 import './App.css';
 import Issues from "./components/Issues"
+import NewIssues from './components/NewIssues';
 
 function App() {
   let issues = [
@@ -19,8 +20,9 @@ function App() {
     }
   ]
   return (
-    <div className="App">
-      <Issues issues={issues}/>
+    <div className='d-flex' style={ {height:'100vh'} }>
+      <Issues width="30%" issues={issues}/>
+      <NewIssues />
     </div>
   );
 }
