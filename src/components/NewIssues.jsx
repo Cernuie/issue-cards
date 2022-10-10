@@ -1,14 +1,21 @@
 import React, { useRef } from 'react'
+import axios from 'axios';
 import { Form, Button } from 'react-bootstrap'
 
 export default function NewIssues() {
+    const url = '/api/issues/new'
     const nameRef = useRef()
     const assignedRef = useRef()
     const priorityRef = useRef()
     const issueRef = useRef()
     function handleSubmit(e) {
         e.preventDefault()
-
+        const issueName = nameRef.current.value
+        const assigned = assignedRef.current.value
+        const priority = priorityRef.current.value
+        const issue = issueRef.current.value
+        // return axios
+        // .post(url, {issueName, assigned, priority, issue})
         console.log(nameRef.current.value, assignedRef.current.value, priorityRef.current.value, issueRef.current.value)
     }
   return (
