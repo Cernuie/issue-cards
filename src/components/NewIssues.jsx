@@ -12,7 +12,7 @@ export default function NewIssues() {
         console.log(nameRef.current.value, assignedRef.current.value, priorityRef.current.value, issueRef.current.value)
     }
   return (
-    <div>
+    <div style={ {margin: '0.5em' } }>
         <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Issue Name</Form.Label>

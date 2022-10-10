@@ -5,7 +5,7 @@ import { Accordion } from 'react-bootstrap'
 export default function issues({ issues }) {
 
   return (
-    <Accordion defaultActiveKey="0" alwaysOpen style={{width: '30%'}}>
+    <Accordion className='border-end 2px overflow-auto' defaultActiveKey="0" alwaysOpen style={{width: '30%'}}>
         {issues.map((issue, index) => (
             <Accordion.Item key={issue.index} eventKey={index}>
                 <Accordion.Header>
