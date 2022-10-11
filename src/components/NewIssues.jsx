@@ -1,9 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap'
 
 export default function NewIssues() {
-    const url = '/api/issues/new'
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        const url = 'http://localhost:4444/api/issues/users'
+        axios.get(url).then((response) => {
+            setUsers(response.data.response)
+        }).catch((error) => console.log(error))
+    }, [])
     const nameRef = useRef()
     const assignedRef = useRef()
     const priorityRef = useRef()
@@ -14,9 +20,14 @@ export default function NewIssues() {
         const assigned = assignedRef.current.value
         const priority = priorityRef.current.value
         const issue = issueRef.current.value
-        // return axios
-        // .post(url, {issueName, assigned, priority, issue})
-        console.log(nameRef.current.value, assignedRef.current.value, priorityRef.current.value, issueRef.current.value)
+        const url = 'http://localhost:4444/api/issues/new'
+        return axios
+        .post(url, {issueName, assigned, priority, issue})
+        .then((response) => {
+            console.log(response)
+        }).catch((e) => {
+            console.log(e)
+        })
     }
   return (
     <div style={ {margin: '0.5em' } }>
@@ -28,9 +39,11 @@ export default function NewIssues() {
             <Form.Group>
                 <Form.Label>Assign this issue to:</Form.Label>
                 <Form.Select ref={assignedRef}>
-                    <option value="name 1"> Name 1 </option>
-                    <option value="name 2"> Name 2 </option>
-                    <option value="name 3"> Name 3 </option>
+                    {users.map((user) => {
+                        return(
+                            <option key={user.id} value={user.name}>{user.name}</option>
+                        )
+                    })}
                 </Form.Select>
             </Form.Group>
             <Form.Group>

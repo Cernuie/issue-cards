@@ -1,24 +1,34 @@
 import './App.css';
+import React, { useState, useEffect } from 'react'
 import Issues from "./components/Issues"
 import NewIssues from './components/NewIssues';
+import axios from 'axios';
 
 function App() {
-  let issues = [
+  const [issues, setIssues] = useState([
     {
-      index: 0,
-      name: "Issue 1",
-      assigned_to: ['name1', 'name2'],
-      issue: "Bug 1",
+      id: 0,
+      issue_name: "Issue 1",
+      assigned_to: 'Name 1',
+      description: "Bug 1",
       priority: "High"
     },
     {
-      index: 1,
-      name: "Issue 2",
-      assigned_to: ['name3', 'name4'],
-      issue: "Bug 2",
+      id: 1,
+      issue_name: "Issue 2",
+      assigned_to: 'Name 3',
+      description: "Bug 2",
       priority: "Low"
     }
-  ]
+  ])
+
+  useEffect(() => {
+    const url = 'http://localhost:4444/api/issues'
+    axios.get(url).then((res) => {
+      setIssues(res.data.response)
+    }).catch((e) => console.log(e))
+  }, [])
+
   return (
     <div className='d-flex' style={ {height:'100vh'} }>
       <Issues width="30%" issues={issues}/>
