@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS userIssues CASCADE;
+DROP TABLE IF EXISTS user_issues CASCADE;
 
 CREATE TABLE user_issues (
     user_id int NOT NULL,
