@@ -37,7 +37,9 @@ exports.getUsersFromDatabase = getUsersFromDatabase;
 
 const addIssuesToDatabase = (issueName, assigned, priority, description) => {
     const queryString = `
-    INSERT INTO issues (issue_name, assigned, priority, description)
+    INSERT INTO issues (issue_name, assigned_to, priority, description)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;
     `
 
     const queryParams = [issueName, assigned, priority, description]
@@ -49,10 +51,18 @@ const addIssuesToDatabase = (issueName, assigned, priority, description) => {
 
 exports.addIssuesToDatabase = addIssuesToDatabase
 
-const getUserForIssues = (assigned) => {
+const linkUserToIssues = (assignedUserId, issue_id) => {
+    const queryString = `
+    INSERT INTO user_issues (user_id, issue_id)
+    VALUES ($1, $2)
+    RETURNING *;
+    `
 
+    const queryParams = [assignedUserId, issue_id]
+    
+    return pool.query(queryString, queryParams)
+    .then(result => result.rows[0])
+    .catch((e) => e)
 }
 
-const linkUserToIssues = (assigned) => {
-
-}
+exports.linkUserToIssues = linkUserToIssues

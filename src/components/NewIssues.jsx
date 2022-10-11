@@ -18,11 +18,12 @@ export default function NewIssues() {
         e.preventDefault()
         const issueName = nameRef.current.value
         const assigned = assignedRef.current.value
+        const assignedUserId = users.find(element => element.name === assigned).id
         const priority = priorityRef.current.value
         const issue = issueRef.current.value
         const url = 'http://localhost:4444/api/issues/new'
         return axios
-        .post(url, {issueName, assigned, priority, issue})
+        .post(url, {issueName, assigned, assignedUserId, priority, issue})
         .then((response) => {
             console.log(response)
         }).catch((e) => {
