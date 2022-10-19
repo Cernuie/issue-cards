@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap'
-import useAxiosPost from '../hooks/useAxiosPost';
 
 export default function NewIssues() {
     const [users, setUsers] = useState([])
